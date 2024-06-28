@@ -1,13 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: $title$
+  name: backend
+  namespace: "medhead"
 spec:
   selector:
-    app: $title$
+    app: medhead
   ports:
-    - protocol: $TCP$
-      port: $80$
-      targetPort: $8080$
-  type: NodePort
-  $END$
+    - protocol: TCP
+      port: 8081
+  

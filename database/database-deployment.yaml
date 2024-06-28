@@ -1,26 +1,34 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: $title$
-  labels:
-    app: $title$
+  name: mysql
+  namespace: "medhead"
 spec:
-  replicas: $1$
+  replicas: 1
   selector:
     matchLabels:
-      app: $title$
+      app: mysql
   template:
     metadata:
-      name: $title$
       labels:
-        app: $title$
+        app: mysql
     spec:
       containers:
-        - name: $title$
-          image: $nginx$
-          imagePullPolicy: IfNotPresent
+        - name: mysql
+          image: mysql:latest
           ports:
-            - containerPort: $80$
-              protocol: $TCP$
-      restartPolicy: Always
-      $END$
+            - containerPort: 3306
+          envFrom:
+            - configMapRef:
+                name: mysql
+            - secretRef:
+                name: mysql
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: mysql-database-storage
+      volumes:
+        - name: mysql-database-storage
+          persistentVolumeClaim:
+            claimName: mysql-volume
+
+      
