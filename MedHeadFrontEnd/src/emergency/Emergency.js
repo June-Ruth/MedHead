@@ -38,7 +38,7 @@ export default function Emergency({usernameP, passwordP}) {
         params.append("latitude", latitude);
         params.append("longitude", longitude);
 
-        const url = "http://" + process.env.REACT_APP_HOST + ":" + process.env.REACT_APP_PORT + "/emergency/hospital?" + params.toString();
+        const url = "http://" + process.env.REACT_APP_URL + "/emergency/hospital?" + params.toString();
 
         const response = await fetch(url, {
             headers: {

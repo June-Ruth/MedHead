@@ -12,7 +12,7 @@ export default function Login() {
         params.append('username', username);
         params.append('password', password);
 
-        const url = "http://" + process.env.REACT_APP_HOST + ":" + process.env.REACT_APP_PORT + "/login?" + params.toString();
+        const url = "http://" + process.env.REACT_APP_URL + "/login?" + params.toString();
 
         const response = await fetch(url);
 
